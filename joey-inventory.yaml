@@ -1,0 +1,26 @@
+---
+#This is a YAML version of an Ansible inventory file for my LAN
+all:
+  hosts:
+    n5k1:
+     ansible_host: 192.168.180.250
+     hostname: n5k1
+    n5k2:
+     ansible_host: 192.168.180.251
+     hostname: n5k2
+    
+  children:
+   n5k:
+    hosts:
+     n5k1:
+     n5k1:
+    vars:
+     ansible_network_os: nxos
+     ansible_user: tbd
+     ansible_connection: network_cli
+     banner: "set system login banner pre-login 'You are attempting to log into: {{ hostname }}.  If you are not an authorized user, turn around!! '"
+     trunk_int: eth2
+     vif1: 20
+     vif2: 30
+     vlan1_net: 10.0.20.
+     vlan2_net: 10.0.30.
